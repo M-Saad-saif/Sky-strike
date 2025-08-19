@@ -1,0 +1,200 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    position: absolute;
+    justify-self: anchor-center;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    /* background-color: black; */
+    top: 29%;
+    width: 38%;
+    background: linear-gradient(#0000ff68, transparent);
+    padding: 30px;
+    border-radius: 12px;
+    display: block;
+    height: 57vh;
+    /* z-index: -2; */
+}
+
+.container img {
+    width: 90px;
+    position: relative;
+    top: -2%;
+    /* z-index: -1; */
+}
+
+.container h1 {
+    margin-top: -16px;
+}
+
+.container span {
+    color: #bafff4;
+    text-shadow: -2px 1px 20px #00e6ff;
+}
+
+h3 {
+    margin: 10px;
+}
+
+#gunbtn {
+    font-weight: 600;
+    background: #3060ad;
+    padding: 2px;
+    width: 13%;
+    border: none;
+    margin-right: 5px;
+    border-radius: 4px;
+    transition: transform 0.1s, background-color 0.1s ease-in-out, color 0.1s ease-in-out;
+    font-size: 14px;
+}
+
+#gunbtn:hover {
+    transform: scale(1.1);
+    background-color: #023172;
+    font-weight: 100;
+    color: white;
+    cursor: pointer;
+}
+
+#cannonbtn {
+    font-weight: 600;
+    background: #2859aa;
+    padding: 2px;
+    width: 20%;
+    border: none;
+    border-radius: 4px;
+    transition: transform 0.1s, background-color 0.1s ease-in-out, color 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+    font-size: 14px;
+
+}
+
+#cannonbtn:hover {
+    transform: scale(1.1);
+    background-color: #023172;
+    color: white;
+    cursor: pointer;
+}
+
+.image-container img {
+    /* width: 100%;
+    height: 103.5vh;
+    image-rendering: pixelated; */
+
+    width: 100%;
+    height: 103.5vh;
+    bottom: 0;
+    image-rendering: pixelated;
+    position: fixed;
+    z-index: -1;
+}
+
+.image-container button {
+    backdrop-filter: blur(15px);
+    position: fixed;
+    background: #0100c0b8;
+    color: white;
+    right: -39%;
+    justify-self: anchor-center;
+    align-self: center;
+    bottom: 13%;
+    font-size: 25px;
+    display: block;
+    /* padding: 8px; */
+    /* margin: -14px; */
+    width: 21%;
+    border-radius: 9px;
+    border: 2px solid #0100c0b8;
+    ;
+}
+
+.image-container button:hover {
+    cursor: pointer;
+    background-color: #ddddffb8;
+    border: 2px solid #0000c0;
+    color: black;
+}
+
+.option-container {
+    width: 100%;
+    height: 103.5vh;
+    background: #0000ff1a;
+
+}
+
+.btn-container {
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.mobile-msg {
+    display: none;
+}
+
+@media screen and (min-width: 0px) and (max-width: 900px) {
+    .image-container, .container, .canvas {
+        display: none;
+    }
+
+    body {
+        background-color: black;
+    }
+
+    .mobile-msg {
+        display: flex;
+        text-align: center;
+        justify-self: center;
+        flex-direction: column;
+        /* background-color: #00e6ff; */
+        margin-top: 40%;
+        width: 95%;
+        background: linear-gradient(180deg, #0016dd, #0019ff91, transparent);
+        height: 59vh;
+        border-radius: 12px;
+        color: white;
+    }
+
+    .mobile-msg img {
+        width: 29%;
+        align-self: anchor-center;
+        margin-top: 18px;
+    }
+
+
+    .mobile-msg h2 {
+        width: 87%;
+        align-self: anchor-center;
+    }
+
+    .mobile-grid {
+        margin-top: 17px;
+    }
+    .mobile-grid i{
+        color: yellow;
+    }
+
+    .div1 {
+        text-align: left;
+        margin-left: 11%;
+        gap: 5px;
+        display: grid;
+    }
+
+
+
+}

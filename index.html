@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="skystrike logo.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="op rafale.css">
+    <title>Sky Strike | SAAD</title>
+</head>
+
+<body>
+
+
+    <div class="mobile-msg">
+        <img src="skystrike logo.png" alt="">
+        <h2>You cannot play this game in mobile until the Next update</h2>
+
+        <div class="mobile-grid">
+            <h3>Next update features:</h3>
+            <div class="div1">
+                <h5><i class="ri-gemini-fill"></i> Playable in mobile phones</h5>
+                <h5><i class="ri-gemini-fill"></i> Add difficulty levels to make it more fun</h5>
+                <h5><i class="ri-gemini-fill"></i> Targets to achieve according to difficulty level</h5>
+                <h5><i class="ri-gemini-fill"></i> Day and Night option</h5>
+                <h5><i class="ri-gemini-fill"></i> Boss plane</h5>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="image-container">
+        <button>
+            Click to start
+        </button>
+        <img src="sky strike  design 2.png" alt="">
+    </div>
+
+
+
+    <div class="container">
+        <img src="skystrike logo.png" alt="">
+        <h1>Welcome to <span>Sky Strike</span> </h1>
+        <h3>Choose your Weapon</h3>
+        <div class="btn-container">
+            <button id="gunbtn">GUN</button>
+            <button id="cannonbtn">Artillery</button>
+        </div>
+        <h4>Planes down: <span id="score">--</span></h4>
+    </div>
+
+    <canvas></canvas>
+
+    <script src="op rafale.js"></script>
+    <script>
+        if ("ServiceWorker" in navigator) {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker.register('service-worker.js').then((reg) => {
+                    console.log("service worker register at: ", reg.scope)
+                }).catch((err) => {
+                    console.log("service worker register failed: ", err)
+                })
+            })
+        }
+
+    </script>
+</body>
+
+</html>
