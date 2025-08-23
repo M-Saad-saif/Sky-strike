@@ -1,6 +1,12 @@
 let opening_interface = document.querySelector(".image-container");
 let option_interface = document.querySelector(".container");
 let score_part = document.querySelector("#score");
+let timeBtn = document.querySelector("#time-btn");
+let easyBtn = document.querySelector("#easy-btn");
+let hardBtn = document.querySelector("#hard-btn");
+let insaneBtn = document.querySelector("#insane-btn");
+let target_part = document.querySelector("#target-plane");
+let validation = document.querySelector("#validation-notice");
 
 let canvas = document.querySelector("canvas");
 let c = canvas.getContext("2d");
@@ -19,15 +25,25 @@ let gameOverTimeout = null;
 
 option_interface.style.display = "none";
 
-let mouse = {
-  x: canvas.width / 2,
-  y: canvas.height / 2,
-};
-
 opening_interface.addEventListener("click", () => {
   opening_interface.style.display = "none";
   option_interface.style.display = "block";
 });
+
+// for random targets==========
+easyBtn.addEventListener("click", () => {
+  target_part.innerHTML = Math.floor(Math.random() * 11 + 5);
+  // target_part.innerHTML = 1;
+});
+
+hardBtn.addEventListener("click", () => {
+  target_part.innerHTML = Math.floor(Math.random() * (25 - 15 + 1) + 15);
+});
+
+insaneBtn.addEventListener("click", () => {
+  target_part.innerHTML = Math.floor(Math.random() * (35 - 25 + 1) + 25);
+});
+// ==============================
 
 window.addEventListener("resize", () => {
   canvas.width = innerWidth;
@@ -51,6 +67,13 @@ class Player {
 
     this.image = playerimage;
     let playerimageScale = 0.13;
+
+    // for mobile screen
+    if (window.innerWidth <= 950 && window.innerWidth >= 315) {
+      playerimageScale = 0.1;
+      this.y = canvas.height - 95;
+    }
+
     this.image.onload = () => {
       this.width = this.image.width * playerimageScale;
       this.height = this.image.height * playerimageScale;
@@ -74,12 +97,24 @@ class Player {
       c.drawImage(this.image, this.x, this.y, this.width, this.height);
     // life line of player
     c.fillStyle = "green";
-    c.fillRect(
-      this.x,
-      this.y + 118,
-      (this.health / this.maxhealth) * this.width,
-      3
-    );
+
+    // health line draw for mobile
+    if (window.innerWidth <= 950 && window.innerWidth >= 315) {
+      c.fillRect(
+        this.x,
+        this.y + 90,
+        (this.health / this.maxhealth) * this.width,
+        3
+      );
+      // for pc
+    } else {
+      c.fillRect(
+        this.x,
+        this.y + 118,
+        (this.health / this.maxhealth) * this.width,
+        3
+      );
+    }
 
     // player blast image
     if (this.health <= 0) {
@@ -104,13 +139,18 @@ class Cannon {
     this.y = canvas.height - 110;
     this.image = cannonimage;
 
-    let cannonimageScale = 0.5;
+    if (window.innerWidth <= 950 && window.innerWidth >= 315) {
+      this.y = canvas.height - 75;
+    }
+    // for mobile and pc
+    let cannonimageScale =
+      window.innerWidth <= 950 && window.innerWidth >= 315 ? 0.35 : 0.5;
 
     this.image.onload = () => {
       this.width = this.image.width * cannonimageScale;
       this.height = this.image.height * cannonimageScale;
     };
-    this.maxhealth = 2;
+    this.maxhealth = 3;
     this.health = this.maxhealth;
 
     let cannanBlastPic = new Image();
@@ -128,18 +168,24 @@ class Cannon {
       c.drawImage(this.image, this.x, this.y, this.width, this.height);
     // life line of cannon
     c.fillStyle = "green";
+
+    let cannon_life_height =
+      window.innerWidth <= 950 && window.innerWidth >= 315 ? 70 : 104;
     c.fillRect(
       this.x,
-      this.y + 104,
+      this.y + cannon_life_height,
       (this.health / this.maxhealth) * this.width,
       3
     );
+
     // cannon blast image
+    let cannonblastImage_height =
+      window.innerWidth <= 950 && window.innerWidth >= 315 ? -35 : 0;
     if (this.health <= 0)
       c.drawImage(
         this.cannonblastImage,
         this.x,
-        this.y,
+        this.y + cannonblastImage_height,
         this.cannonblastImage_width,
         this.cannonblastImage_height
       );
@@ -196,6 +242,7 @@ class Bullet {
 
   draw() {
     // for cnanon
+
     if (this.type === "artillery") {
       let gradiant = c.createRadialGradient(
         this.x,
@@ -274,7 +321,13 @@ class Plane {
   constructor(direction) {
     this.maxhealth = Math.random() * 20;
     this.health = this.maxhealth;
-    this.speed = 2 + Math.random() * 10;
+    // plane speed in miblie and laptop
+    if (window.innerWidth <= 950 && window.innerWidth >= 315) {
+      this.speed = 1 + Math.random() * 2.8;
+    } else {
+      this.speed = 2 + Math.random() * 10;
+    }
+
     this.direction = direction;
 
     // plane for left👇 direction
@@ -284,6 +337,9 @@ class Plane {
       this.image = planepic;
 
       let planepicScale = 0.41;
+      if (window.innerWidth <= 950 && window.innerWidth >= 315) {
+        planepicScale = 0.3;
+      }
       this.image.onload = () => {
         this.width = this.image.width * planepicScale;
         this.height = this.image.height * planepicScale;
@@ -298,6 +354,10 @@ class Plane {
       this.image = planepic2;
 
       let planepicScale2 = 0.41;
+      // for mobile
+      if (window.innerWidth <= 950 && window.innerWidth >= 315) {
+        planepicScale2 = 0.3;
+      }
       this.image.onload = () => {
         this.width = this.image.width * planepicScale2;
         this.height = this.image.height * planepicScale2;
@@ -347,14 +407,32 @@ class Plane {
     // engin particles of plane coming from left👇
     if (this.direction === "left") {
       this.x -= this.speed;
-      this.spawnPlaneParticles(
-        this.x + this.width / 2 + 50,
-        this.y + this.height / 2 + 6
-      );
-    } else {
+      // particle positon for miblioe
+      if (window.innerWidth <= 950 && window.innerWidth >= 315) {
+        this.x -= this.speed;
+        this.spawnPlaneParticles(
+          this.x + this.width / 2 + 40,
+          this.y + this.height / 2 + 5
+        );
+        // particle positon for lapotp
+      } else {
+        this.spawnPlaneParticles(
+          this.x + this.width / 2 + 50,
+          this.y + this.height / 2 + 6
+        );
+      }
       // engin particles of plane coming from right👇
+    } else {
       this.x += this.speed;
-      for (let i = 0; i < 2; i++) {
+      // particle positon for miblioe
+      if (window.innerWidth <= 950 && window.innerWidth >= 315) {
+        this.x += this.speed;
+        this.spawnPlaneParticles(
+          this.x + this.width / 2 - 40,
+          this.y + this.height / 2 + 5
+        );
+        // particle positon for lapotp
+      } else {
         this.spawnPlaneParticles(
           this.x + this.width / 2 - 50,
           this.y + this.height / 2 + 6
@@ -400,6 +478,7 @@ class Plane {
 
   shoot() {
     if (this.health <= 0 || player.health <= 0 || cannon.health <= 0) return; //with this👈 plane cannot fire
+    let speed = window.innerWidth <= 950 && window.innerWidth >= 315 ? 6 : 10;
 
     // for weapon type gun
     if (weaponType === "gun") {
@@ -414,7 +493,7 @@ class Plane {
             "missile",
             player.x + player.width / 2,
             player.y + player.height,
-            10
+            speed
           )
         );
 
@@ -434,7 +513,7 @@ class Plane {
             "missile",
             cannon.x + cannon.width / 2 - 100,
             cannon.y + cannon.height,
-            10
+            speed
           )
         );
         this.jet_missile_sound();
@@ -474,7 +553,12 @@ function startSpawningPlanes() {
   }, 6000);
 }
 
-// ===event listenenri==
+// ================event listenenri=============
+let mouse = {
+  x: canvas.width / 2,
+  y: canvas.height / 2,
+};
+
 window.addEventListener("mousemove", (e) => {
   mouse.x = e.clientX;
   mouse.y = e.clientY;
@@ -513,16 +597,21 @@ window.addEventListener("mousedown", () => {
       cannonsound.play();
       cannonsound.currentTime = 0;
 
+      let cannon_bullet_hightpoisiton =
+        window.innerWidth <= 950 && window.innerWidth >= 315 ? 20 : 50;
+      let cannon_bullet_speed =
+        window.innerWidth <= 950 && window.innerWidth >= 315 ? 15 : 23;
+
       bullets.push(
         new Bullet(
           cannon.x + 80,
-          cannon.y + 50,
+          cannon.y + cannon_bullet_hightpoisiton,
           13,
           "red",
           "artillery",
           mouse.x,
           mouse.y,
-          23
+          cannon_bullet_speed
         )
       );
       lastArtilleryShoot = now;
@@ -530,26 +619,78 @@ window.addEventListener("mousedown", () => {
   }
 });
 
+// funciton for gun and cannon evetlistenrer to not write again and again
+function chosingweapon(type) {
+  // /checking validation if player not select deff level
+  if (target_part.innerHTML === "00") {
+    firing = false;
+    weaponType = null;
+    bullets = [];
+
+    validation.style.display = "block";
+    setTimeout(() => {
+      validation.style.display = "none";
+    }, 1000);
+  } else {
+    weaponType = type;
+    option_interface.style.display = "none";
+    canvas.style.display = "block";
+    startgame();
+  }
+}
+
 window.addEventListener("mouseup", (e) => {
   firing = false;
   clearInterval(firingInterval);
 });
 
 document.querySelector("#gunbtn").addEventListener("click", () => {
-  weaponType = "gun";
-  option_interface.style.display = "none";
-  canvas.style.display = "block";
-  // animation();
-  startgame();
+  chosingweapon("gun");
 });
 
 document.querySelector("#cannonbtn").addEventListener("click", () => {
-  weaponType = "artillery";
-  option_interface.style.display = "none";
-  canvas.style.display = "block";
-  // animation();
-  startgame();
+  chosingweapon("artillery");
 });
+
+// event listeners for mobile
+window.addEventListener("touchmove", (e) => {
+  let touch = e.touches[0]; // first finger
+  mouse.x = touch.clientX - player.width / 2 - 5;
+  mouse.y = touch.clientY - player.height / 2;
+});
+
+window.addEventListener("touchstart", () => {
+  if (player.health <= 0 || firing) return;
+  if (weaponType === "gun") {
+    firing = true;
+    firingInterval = setInterval(() => {
+      let gunSound = document.createElement("audio");
+      gunSound.volume = 0.6;
+      gunSound.src = "gnfire.mp3";
+      gunSound.play();
+      gunSound.currentTime = 0;
+
+      bullets.push(
+        new Bullet(
+          player.x + 85,
+          player.y + 15,
+          5,
+          "red",
+          "gun",
+          mouse.x,
+          mouse.y,
+          10
+        )
+      );
+    }, 50);
+  }
+});
+
+window.addEventListener("touchend", () => {
+  firing = false;
+  clearInterval(firingInterval);
+});
+
 // ===========================================
 
 // =======functions===========
@@ -594,8 +735,8 @@ function updateParticles(
   }
 }
 
-// funtion of gameover
-function gameOver() {
+// game over funtion
+function GameOver() {
   if (gameOverTimeout) {
     clearTimeout(gameOverTimeout);
     gameOverTimeout = null;
@@ -606,17 +747,46 @@ function gameOver() {
     cancelAnimationFrame(animate);
     animate = null;
   }
-  // cancelAnimationFrame(animate);
+
   clearInterval(planeSpawnInterval);
   clearInterval(planeSpawnInterval2);
   clearInterval(firingInterval);
+
+  firing = false;
+  weaponType = null;
+  bullets = [];
 
   c.clearRect(0, 0, innerWidth, innerHeight);
   planes.forEach((plane) => plane.destroy());
 
   option_interface.style.display = "block";
+  target_part.innerHTML = "00";
   canvas.style.display = "none";
 }
+
+// wining game funtion
+let result_screen = document.querySelector(".result-screen");
+function wingame() {
+  GameOver();
+  result_screen.style.display = "flex";
+}
+
+// losing game function
+let lose_screen = document.querySelector("#lose-situation");
+function loseGame() {
+  GameOver();
+  lose_screen.style.display = "flex";
+}
+
+let playagainBtn = document.querySelector(".playagian-btn");
+playagainBtn.addEventListener("click", () => {
+  result_screen.style.display = "none";
+});
+
+let playagainBtn2 = document.querySelector("#playagainBtn2");
+playagainBtn2.addEventListener("click", () => {
+  lose_screen.style.display = "none";
+});
 
 // function of strat game
 function startgame() {
@@ -657,21 +827,56 @@ function startgame() {
   cannon_distroy = false;
 
   startSpawningPlanes();
-
-  // c.clearRect(0, 0, canvas.width, canvas.height);
   animation();
 }
+
+// event listener for day and night
+let time = "day";
+timeBtn.addEventListener("click", () => {
+  if (time === "day") {
+    time = "night";
+    timeBtn.innerHTML = `<i class="ri-moon-fill"></i>Night`;
+    timeBtn.style.backgroundColor = "#2f004e";
+    timeBtn.style.color = "white";
+  } else if (time === "night") {
+    time = "day";
+    timeBtn.innerHTML = `<i class="ri-sun-fill"></i> Day`;
+    timeBtn.style.backgroundColor = "#f7cc0dcf";
+    timeBtn.style.color = "black";
+  }
+});
+
+// funciton of canvas background
+function BGgradiant() {
+  let gradiant = c.createLinearGradient(0, 0, 0, canvas.height);
+
+  if (time === "day") {
+    gradiant.addColorStop(0, "#0032c8");
+    gradiant.addColorStop(1, "#c6ffd2");
+  } else if (time === "night") {
+    gradiant.addColorStop(0, "#000000");
+    gradiant.addColorStop(1, "#0f032bff");
+  }
+
+  c.fillStyle = gradiant;
+  c.fillRect(0, 0, canvas.width, canvas.height);
+}
+// ======================================
 
 //===== animation function====
 let animate = null;
 function animation() {
   animate = requestAnimationFrame(animation);
-  c.fillStyle = "black";
-  c.fillRect(0, 0, canvas.width, canvas.height);
-  if (weaponType === "gun") {
-    player.draw();
-  } else if (weaponType === "artillery") {
-    cannon.draw();
+  BGgradiant();
+
+  if (!target_part.innerHTML) {
+    easyBtn.textContent = "fill";
+  } else {
+    if (weaponType === "gun") {
+      player.draw();
+    } else if (weaponType === "artillery") {
+      cannon.draw();
+    }
   }
   // calling each planes
   for (let p = planes.length - 1; p >= 0; p--) {
@@ -740,7 +945,13 @@ function animation() {
             height: plane.height,
             life: 20,
           });
-          break;
+
+          // when gun achieve target you won
+          if (score >= target_part.innerHTML) {
+            setTimeout(() => {
+              wingame();
+            }, 1000);
+          }
         }
       }
     }
@@ -825,7 +1036,7 @@ function animation() {
 
         // calling game over funtion after 1s
         gameOverTimeout = setInterval(() => {
-          gameOver();
+          loseGame();
         }, 1000);
 
         // particles after distroy of cannon
@@ -845,7 +1056,7 @@ function animation() {
 
         // calling game over funtion after 1s
         gameOverTimeout = setTimeout(() => {
-          gameOver();
+          loseGame();
         }, 1000);
       }
     }
