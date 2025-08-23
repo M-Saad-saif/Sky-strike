@@ -20,7 +20,7 @@ let urlsToCache = [
   "./planepic2.png",
   "./player blast pic.png",
   "./sky strike  design 2.png",
-  "./sky strike for mobile.png",
+  "./mobile play the game.png",
   "./skystrike logo.png",
 ];
 
