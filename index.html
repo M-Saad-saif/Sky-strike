@@ -12,7 +12,7 @@
 
 <body>
 
-
+<!--=============================================================  -->
     <div class="mobile-msg">
         <img src="skystrike logo.png" alt="">
         <h2>You cannot play this game in mobile until the Next update</h2>
@@ -26,30 +26,61 @@
                 <h5><i class="ri-gemini-fill"></i> Day and Night option</h5>
                 <h5><i class="ri-gemini-fill"></i> Boss plane</h5>
             </div>
-
         </div>
-
     </div>
+
+    <!--=============================================================  -->
+
     <div class="image-container">
         <button>
             Click to start
         </button>
         <img src="sky strike  design 2.png" alt="">
     </div>
-
-
-
-    <div class="container">
-        <img src="skystrike logo.png" alt="">
-        <h1>Welcome to <span>Sky Strike</span> </h1>
-        <h3>Choose your Weapon</h3>
-        <div class="btn-container">
-            <button id="gunbtn">GUN</button>
-            <button id="cannonbtn">Artillery</button>
-        </div>
-        <h4>Planes down: <span id="score">--</span></h4>
+<!--=============================================================  -->
+    <div class="mobile-first-screen">
     </div>
 
+    <!--=============================================================  -->
+    <div class="container">
+            <div class="result-screen" id="win-situation">
+                <p>Congratulations! you achieve all targets.</p>
+                <button class="playagian-btn" id="playagainBtn">Play again</button>
+            </div>
+
+            <div class="result-screen" id="lose-situation">
+                <p>OOPS!! You are distroyed.</p>
+                <button class="playagian-btn" id="playagainBtn2">Play again</button>
+            </div>
+
+
+        <img src="skystrike logo.png" alt="">
+        <h1>Welcome to <span>Sky Strike</span> </h1>
+        <h3>Planes down: <span id="score">--</span></h3>
+        <div class="lvl-option">
+            <h4>🔵Choose difficulty level</h4>
+            <button class="lvl-btn" id="easy-btn">Easy</button>
+            <button class="lvl-btn" id="hard-btn">Hard</button>
+            <button class="lvl-btn" id="insane-btn">Insane</button>
+
+        </div>
+        <div class="btn-container">
+            <div class="weapon-div">
+                <h4>🔵Choose your Weapon</h4>
+                <button id="gunbtn">GUN</button>
+                <button id="cannonbtn">Artillery</button>
+                <p id="validation-notice"><i class="ri-error-warning-line"></i>Choose difficulty level</p>
+            </div>
+            <div class="time-div">
+                <h4>🔵Choose Day / Night</h4>
+                <button id="time-btn"><i class="ri-sun-fill"></i>Day</button>
+            </div>
+        </div>
+
+        <h3 id="target-heading">Targets to shoot down: <span id="target-plane">00</span></h3>
+
+    </div>
+<!--=============================================================  -->
     <canvas></canvas>
 
     <script src="op rafale.js"></script>
