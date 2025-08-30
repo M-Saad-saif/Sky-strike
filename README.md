@@ -54,7 +54,7 @@ Every enemy jet has different **speed** and **health**, making the game more cha
 <img width="974" height="549" alt="image" src="" />
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/185e8057-be44-4cbd-9120-f60bf3bf9043" width="400">
+  <img src="https://github.com/user-attachments/assets/f177cd70-1355-4659-9cec-6c49e99fdea7" width="400">
   <img src="https://github.com/user-attachments/assets/40871101-085a-4db1-b053-f21605b2883d" width="400">
   <img src="https://github.com/user-attachments/assets/7a6e39b1-e688-46cd-98cd-a1a5e520bde9" width="400">
 </p>
