@@ -24,15 +24,17 @@ Every enemy jet has different **speed** and **health**, making the game more cha
 * 🏆 **Score Tracking**
 * 🎶 **Sound Effects** for immersive gameplay
 * 🖥️ **Playable on Desktop**
+* 🌃 **Day & NIght option**
+* 🎯 **select difficulty level**
 
 ---
 
 ## 🎮 How to Play
-
+1  **Select difficulty level** → Easy, Hard, Insane
 1. **Choose your weapon** → Cannon or Gun
 2. **Shoot enemy jets** before they hit you
 3. **Avoid missiles** fired by jets
-4. **Survive** as long as possible & beat your high score
+4. **Survive** Untill you achieve target
 
 ---
 
@@ -44,7 +46,7 @@ Every enemy jet has different **speed** and **health**, making the game more cha
 
 ### 📱 Mobile
 
-* Update coming soon for mobiles
+* Use fingers to play
 
 ---
 
@@ -70,15 +72,6 @@ Every enemy jet has different **speed** and **health**, making the game more cha
 * **HTML5** – Game canvas & UI
 * **CSS** – Styling
 * **JavaScript (ES6)** – Game logic & interactivity
-
----
-
-## 🔮 Future Enhancements
-
-* 🎴 Day and Night option
-* 🛡️ Adding difficulty levels
-* 🎯 Targets to achieve 
-* 🛬 Boss plane
 
 ---
 
