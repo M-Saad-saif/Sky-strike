@@ -85,7 +85,7 @@
 
     <script src="op rafale.js"></script>
     <script>
-        if ("ServiceWorker" in navigator) {
+        if ("serviceWorker" in navigator) {
             window.addEventListener("load", () => {
                 navigator.serviceWorker.register('service-worker.js').then((reg) => {
                     console.log("service worker register at: ", reg.scope)
