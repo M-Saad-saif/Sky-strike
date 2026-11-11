@@ -18,7 +18,7 @@ canvas {
 
 .container {
     position: absolute;
-    justify-self: anchor-center;
+    /* justify-self: anchor-center; */
     text-align: center;
     color: rgb(255, 255, 255);
     top: 17%;
@@ -141,12 +141,12 @@ h3 {
 }
 
 .image-container img {
-    width: 100%;
+    /* width: 100%; */
     height: 103.5vh;
     bottom: 0;
     image-rendering: pixelated;
     position: fixed;
-    z-index: -1;
+    z-index: -10;
 }
 
 .image-container button {
@@ -154,16 +154,16 @@ h3 {
     position: fixed;
     background: #0100c0b8;
     color: white;
-    right: -39%;
+    right: 39%;
     justify-self: anchor-center;
     align-self: center;
     bottom: 13%;
     font-size: 25px;
-    display: block;
+    /* display: block; */
     width: 21%;
     border-radius: 9px;
     border: 2px solid #0100c0b8;
-    ;
+    /* z-index: 100; */
 }
 
 .image-container button:hover {
