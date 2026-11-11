@@ -12,7 +12,7 @@
 
 <body>
 
-<!--=============================================================  -->
+
     <div class="mobile-msg">
         <img src="skystrike logo.png" alt="">
         <h2>You cannot play this game in mobile until the Next update</h2>
@@ -26,10 +26,11 @@
                 <h5><i class="ri-gemini-fill"></i> Day and Night option</h5>
                 <h5><i class="ri-gemini-fill"></i> Boss plane</h5>
             </div>
+
         </div>
+
     </div>
 
-    <!--=============================================================  -->
 
     <div class="image-container">
         <button>
@@ -37,12 +38,14 @@
         </button>
         <img src="sky strike  design 2.png" alt="">
     </div>
-<!--=============================================================  -->
+
     <div class="mobile-first-screen">
+
     </div>
 
-    <!--=============================================================  -->
     <div class="container">
+
+
             <div class="result-screen" id="win-situation">
                 <p>Congratulations! you achieve all targets.</p>
                 <button class="playagian-btn" id="playagainBtn">Play again</button>
@@ -80,22 +83,13 @@
         <h3 id="target-heading">Targets to shoot down: <span id="target-plane">00</span></h3>
 
     </div>
-<!--=============================================================  -->
+
+   
+
     <canvas></canvas>
 
     <script src="op rafale.js"></script>
-    <script>
-        if ("serviceWorker" in navigator) {
-            window.addEventListener("load", () => {
-                navigator.serviceWorker.register('service-worker.js').then((reg) => {
-                    console.log("service worker register at: ", reg.scope)
-                }).catch((err) => {
-                    console.log("service worker register failed: ", err)
-                })
-            })
-        }
-
-    </script>
+   
 </body>
 
 </html>
